@@ -23,7 +23,6 @@ export default function App() {
   >(null);
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
-      <ListHeading title="All subcriptions" />
       <FlatList
         ListHeaderComponent={() => (
           <>
