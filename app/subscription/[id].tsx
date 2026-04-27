@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Link, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View,Text } from "react-native";
@@ -11,4 +12,4 @@ const subscriptionDetails = () =>{
         </View>
     )
 }
-export default subscriptionDetails;
+export default subscriptionDetails; 

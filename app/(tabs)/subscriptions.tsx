@@ -3,12 +3,12 @@ import React from "react";
 import { Text } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 const SafeAreaView = styled(RNSafeAreaView);
-
-const insights = () => {
+const subscriptions = () => {
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
-      <Text>setting tab</Text>
+      <Text>Subscription tab</Text>
     </SafeAreaView>
   );
 };
-export default insights;
+
+export default subscriptions;
