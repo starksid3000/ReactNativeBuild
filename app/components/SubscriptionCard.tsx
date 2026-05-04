@@ -6,18 +6,19 @@ import {
 import clsx from "clsx";
 import React from "react";
 import { Image, Pressable, Text, View } from "react-native";
-const SubcriptionCard = ({
+
+const SubscriptionCard = ({
   name,
   price,
   currency,
   icon,
-  color,
   billing,
+  color,
   category,
   plan,
   renewalDate,
-  onPress,
   expanded,
+  onPress,
   paymentMethod,
   startDate,
   status,
@@ -29,18 +30,20 @@ const SubcriptionCard = ({
       style={!expanded && color ? { backgroundColor: color } : undefined}
     >
       <View className="sub-head">
-        <Image source={icon} className="sub-icon" />
-        <View className="sub-copy">
-          <Text numberOfLines={1} className="sub-title">
-            {name}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" className="sub-meta">
-            {" "}
-            {category?.trim() ||
-              plan?.trim() ||
-              (renewalDate ? formatSubscriptionDateTime(renewalDate) : "")}
-          </Text>
+        <View className="sub-main">
+          <Image source={icon} className="sub-icon" />
+          <View className="sub-copy">
+            <Text numberOfLines={1} className="sub-title">
+              {name}
+            </Text>
+            <Text numberOfLines={1} ellipsizeMode="tail" className="sub-meta">
+              {category?.trim() ||
+                plan?.trim() ||
+                (renewalDate ? formatSubscriptionDateTime(renewalDate) : "")}
+            </Text>
+          </View>
         </View>
+
         <View className="sub-price-box">
           <Text className="sub-price">{formatCurrency(price, currency)}</Text>
           <Text className="sub-billing">{billing}</Text>
@@ -58,7 +61,7 @@ const SubcriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {paymentMethod?.trim()}
+                  {paymentMethod?.trim() ?? "Not provided"}
                 </Text>
               </View>
             </View>
@@ -70,7 +73,7 @@ const SubcriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {category?.trim() || plan?.trim()}
+                  {(category?.trim() || plan?.trim()) ?? "Not provided"}
                 </Text>
               </View>
             </View>
@@ -82,7 +85,9 @@ const SubcriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {startDate ? formatSubscriptionDateTime(startDate) : ""}
+                  {startDate
+                    ? formatSubscriptionDateTime(startDate)
+                    : "Not provided"}
                 </Text>
               </View>
             </View>
@@ -94,7 +99,9 @@ const SubcriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {renewalDate ? formatSubscriptionDateTime(renewalDate) : ""}
+                  {renewalDate
+                    ? formatSubscriptionDateTime(renewalDate)
+                    : "Not provided"}
                 </Text>
               </View>
             </View>
@@ -106,7 +113,7 @@ const SubcriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {status ? formatStatusLabel(status) : ""}
+                  {status ? formatStatusLabel(status) : "Not provided"}
                 </Text>
               </View>
             </View>
@@ -116,4 +123,4 @@ const SubcriptionCard = ({
     </Pressable>
   );
 };
-export default SubcriptionCard;
+export default SubscriptionCard;

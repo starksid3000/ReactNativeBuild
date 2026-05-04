@@ -10,17 +10,31 @@ import images from "@/constants/images";
 import "@/global.css";
 import { formatCurrency } from "@/lib/utils";
 import dayjs from "dayjs";
+import { useAuth, useUser } from "@clerk/expo";
 import { styled } from "nativewind";
 import React, { useState } from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import ListHeading from "../components/listheading";
 import UpcomingSubcriptionCard from "../components/upcomingSubcriptionCard";
+
 const SafeAreaView = styled(RNSafeAreaView);
+
 export default function App() {
+  const { user } = useUser();
+  const { signOut } = useAuth();
   const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
     string | null
   >(null);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
       <FlatList
@@ -28,10 +42,17 @@ export default function App() {
           <>
             <View className="home-header">
               <View className="home-user">
-                <Image source={images.avatar} className="home-avatar" />
-                <Text className="home-user-name">{HOME_USER.name}</Text>
+                <Image
+                  source={user?.imageUrl ? { uri: user.imageUrl } : images.avatar}
+                  className="home-avatar"
+                />
+                <Text className="home-user-name">
+                  {user?.firstName ? `Hi, ${user.firstName}` : HOME_USER.name}
+                </Text>
               </View>
-              <Image source={icons.add} className="home-add-icon" />
+              <TouchableOpacity onPress={handleSignOut}>
+                <Image source={icons.add} className="home-add-icon rotate-45" />
+              </TouchableOpacity>
             </View>
 
             <View className="home-balance-card">
